@@ -1,32 +1,41 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Slick from "react-slick";
-// import img from "../../images/kate-macate-RNkWBV4mMLI-unsplash.jpg";
+
 import mg1 from "../../images/MAGAZINES/1234.jpg";
 import mg2 from '../../images/MAGAZINES/akshara.jpg';
 import mg3 from '../../images/MAGAZINES/kajal gradient.jpg';
 import mg4 from '../../images/MAGAZINES/magazine.jpg';
 import mg5 from '../../images/MAGAZINES/model magazin1.jpg';
 import mg6 from '../../images/MAGAZINES/priya.jpg';
+import mg7 from '../../images/MAGAZINES/kuhasini.jpg';
 
-import p1 from '../../images/POSTER/antha kanna paathaka.psd125.jpg';
+
+import p1 from '../../images/POSTER/SURLI 11g.jpg';
 import p2 from '../../images/POSTER/HBD ANADAVAR.jpg';
 import p3 from '../../images/POSTER/MASTER FINAL.jpg';
 import p4 from '../../images/POSTER/new2.jpg';
 import p5 from '../../images/POSTER/putha pudhu kaalai.jpg';
-import p6 from '../../images/POSTER/samantha gradient .jpg';
+import p6 from '../../images/POSTER/november story final .jpg';
 import p7 from '../../images/POSTER/SOORARAI POTTRU TODAY.jpg';
 import p8 from '../../images/POSTER/VIKRAM.jpg';
-import p9 from '../../images/POSTER/yuvan new.jpg';
+import p9 from '../../images/POSTER/triquetra.jpg';
 
 import va1 from '../../images/VECTOR ART/AHAANA KRISHNAN.jpg';
-import va2 from '../../images/VECTOR ART/andrea1.jpg';
-import va3 from '../../images/VECTOR ART/Kalyani Priyadharshan.jpg';
+import va2 from '../../images/VECTOR ART/beast poster design1.jpg';
+import va3 from '../../images/VECTOR ART/IMG_20210816_101501.jpg';
 import va4 from '../../images/VECTOR ART/meenakshi.jpg';
-import va5 from '../../images/VECTOR ART/n t.jpg';
+import va5 from '../../images/VECTOR ART/mirnalini.jpg';
 import va6 from '../../images/VECTOR ART/NEZUKO.jpg';
 import va7 from '../../images/VECTOR ART/Raiza.jpg';
-import va8 from '../../images/VECTOR ART/sanjana sarathy.jpg';
+import va8 from '../../images/VECTOR ART/nivetha2.jpg';
 import va9 from '../../images/VECTOR ART/SID PLAYING.jpg';
+
+import dg1 from '../../images/digital_Art/SARPATTA1.jpg';
+import dg2 from '../../images/digital_Art/malavika dp.jpg';
+import dg3 from '../../images/digital_Art/navarasa trailer.jpg';
+import dg4 from '../../images/digital_Art/thala ajith kumar.jpg';
+import dg5 from '../../images/digital_Art/aathmika1.jpg';
+
 
 import {
   ProjectContainer,
@@ -36,6 +45,11 @@ import {
   ProjectWrapper,
   ProjectImgWrap
 } from "./ProjectsElements";
+
+const digitalArts = [dg1, dg2, dg3, dg4, dg5];
+const magazines = [mg1, mg2, mg3, mg4, mg5, mg6, mg7];
+const posters = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
+const vectorArts = [va1, va2, va3, va4, va5, va6, va7, va8, va9];
 
 const Projects = () => {
   const settings = {
@@ -80,32 +94,66 @@ const Projects = () => {
   const customSetting = {
     rtl: true
   }
+  const [magazine, setMagazine] = useState([]);
+  const [vectorArt, setVectorArt] = useState([]);
+  const [poster, setPoster] = useState([]);
+  const [digitalArt, setDigitalArt] = useState([]);
+
+  useEffect(() => {
+    setMagazine(
+      magazines.map(mg => {
+        return (
+          <ProjectImgWrap key={mg}>
+            <ProjectImg src={mg} />
+          </ProjectImgWrap>
+        )
+      })
+    );
+    setVectorArt(
+      vectorArts.map(va => {
+        return (
+          <ProjectImgWrap key={va}>
+            <ProjectImg src={va} />
+          </ProjectImgWrap>
+        )
+      })
+    );
+    setPoster(
+      posters.map(p => {
+        return (
+          <ProjectImgWrap key={p}>
+            <ProjectImg src={p} />
+          </ProjectImgWrap>
+        )
+      })
+    );
+    setDigitalArt(
+      digitalArts.map(dg => {
+        return (
+          <ProjectImgWrap key={dg}>
+            <ProjectImg src={dg} />
+          </ProjectImgWrap>
+        )
+      })
+    );
+  }, [])
 
   return (
     <ProjectContainer id='projects' >
       <ProjectHeading>Projects have done so far..</ProjectHeading>
       <ProjectWrapper>
+        <ProjectTitle>Digital Art</ProjectTitle>
+        <div data-aos="zoom-out-left"  data-aos-delay="100">
+        <Slick {...settings} className="slider">
+            { digitalArt }
+        </Slick>
+        </div>
+      </ProjectWrapper>
+      <ProjectWrapper>
         <ProjectTitle>Magazines</ProjectTitle>
-        <div data-aos="zoom-out-right" data-aos-delay="100">
+        <div data-aos="zoom-out-right">
           <Slick {...settings} className="slider">
-            <ProjectImgWrap>
-            <ProjectImg src={mg1} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={mg2} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={mg3} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={mg4} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={mg5} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={mg6} />
-            </ProjectImgWrap>
+            {magazine}
         </Slick>
         </div>
       </ProjectWrapper>
@@ -113,33 +161,7 @@ const Projects = () => {
         <ProjectTitle>Vector Arts</ProjectTitle>
         <div data-aos="zoom-out-left" >
         <Slick {...settings} {...customSetting} className="slider">
-        <ProjectImgWrap>
-            <ProjectImg src={va1} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va2} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va3} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va4} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va5} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va6} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va7} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va8} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={va9} />
-            </ProjectImgWrap>
+            {vectorArt}
         </Slick>
         </div>
       </ProjectWrapper>
@@ -147,33 +169,7 @@ const Projects = () => {
         <ProjectTitle>Poster Designs</ProjectTitle>
         <div data-aos="zoom-out-right">
         <Slick {...settings} className="slider">
-        <ProjectImgWrap>
-            <ProjectImg src={p1} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p2} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p3} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p4} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p5} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p6} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p7} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p8} />
-            </ProjectImgWrap>
-            <ProjectImgWrap>
-            <ProjectImg src={p9} />
-            </ProjectImgWrap>
+            { poster }
         </Slick>
         </div>
       </ProjectWrapper>
