@@ -15,7 +15,7 @@ const Footer = () => {
     <FooterContainer>
       <Img src={wave} />
       <FooterDesignTemplate>
-        Designed by <FooterName>Durai Shanmugavel</FooterName>
+        Designed by <FooterName>Manu M</FooterName>
       </FooterDesignTemplate>
       <FooterSocialIcons>
         <IconsLink href="https://m.facebook.com/duraisingam.duraisingam.77" target="_blank" rel="noopener noreferrer">

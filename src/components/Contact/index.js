@@ -25,13 +25,15 @@ const Contact = () => {
   const [isClicked, setClicked] = useState(false);
 
   const sendMail = async e => {
+    e.preventDefault(); 
     setClicked(true);
     setMailStatus('Sending');
     await emailjs.sendForm(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, e.target, process.env.REACT_APP_USER_ID)
       .then(() => {
-        setMailStatus('Send');
+        setMailStatus('Sent');
         e.target.reset();
-      }, () => {
+      }, (res) => {
+        console.log(res);
         setMailStatus('Not sent');
       });
     setClicked(false);
@@ -43,13 +45,13 @@ const Contact = () => {
         <FormHeading>Get in touch</FormHeading>
         <Form onSubmit={e => sendMail(e)}>
           <FormLabel>Name</FormLabel>
-          <FormInput type="text"  name="from_name"/>
+          <FormInput type="text"  name="from_name" required/>
           <FormLabel>Email</FormLabel>
-          <FormInput type="email" name="from_email"/>
+          <FormInput type="email" name="from_email" required/>
           <FormLabel>Subject</FormLabel>
-          <FormInput type="text" name="subject"/>
+          <FormInput type="text" name="subject" required/>
           <FormLabel>Message</FormLabel>
-          <FormInput type="text" name="message"/>
+          <FormInput type="text" name="message" required/>
           <FormBtnWrapper>
             <FormBtn type="submit" disabled={isClicked}>{mailStatus}</FormBtn>
           </FormBtnWrapper>
